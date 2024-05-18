@@ -12,8 +12,8 @@ RUN apt-get install -y python
 RUN apt-get install -y python-dev
 RUN apt-get install -y python-distribute
 RUN apt-get install -y python-pip
-RUN pip install --upgrade pip
-
+#RUN pip install --upgrade pip
+RUN pip install pip==20.3
 # Copy requirements from source
 COPY ./etc /requirements
 RUN pip install -r /requirements/requirements.txt
@@ -52,7 +52,7 @@ COPY ./compose/bots_complete/supervisord.conf /etc/supervisor/supervisord.conf
 # Add Crontab file
 COPY ./compose/bots_complete/crontab /usr/local/lib/python2.7/dist-packages/bots/config/
 
-CMD [ /usr/local/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf" ]
+CMD [ "/usr/local/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf" ]
 
 EXPOSE 8080
 EXPOSE 9001
